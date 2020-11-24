@@ -39,7 +39,7 @@ function handlesubmit(event)
       password: post.password
     };
     console.log(post);
-  axios.post("http://localhost:8000/register",qs.stringify(params)).then((res)=>{
+  axios.post("https://polar-everglades-67407.herokuapp.com/public/index.php/register",qs.stringify(params)).then((res)=>{
   let {data}=res;
   console.log("Data is",data);
 setm(data);

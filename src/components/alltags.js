@@ -29,7 +29,7 @@ function Alltags(props)
         email:props.cookies.userData.userData.email,
         code: props.match.params.tagname,
       };
-    let {data}=await axios.post("http://localhost:8000/getalltags",qs.stringify(params));
+    let {data}=await axios.post("https://polar-everglades-67407.herokuapp.com/public/index.php/getalltags",qs.stringify(params));
     console.log(data);
     setdata(data);
 

@@ -245,5 +245,14 @@ li span{
   {
   color : #003153;
   margin-left: 90px;
+  }.pp{
+    height: 1800px;
+  }
+  .guideline{
+    margin-left : 70px;
+    width: 450px;
+    height: 300px;
+    font-family: 'garamond', serif;
+    border-radius: 25px;
   }
 }
