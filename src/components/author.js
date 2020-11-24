@@ -20,7 +20,7 @@ function Author(props)
     console.log("In use Effect");
     const fetchdata= async ()=>{
     //  console.log("LOL");
-    let {data}=await axios.get("http://localhost:8000/api/key/author");
+    let {data}=await axios.get("https://polar-everglades-67407.herokuapp.com/public/index.php/api/key/author");
     //  console.log("Data is",sessionStorage.getItem('userData'));
     setdata(data);
     }
