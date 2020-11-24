@@ -67,7 +67,7 @@ function handlesubmit(event)
     code: props.match.params.tagname,
     tag: tag
   };
-  axios.post("http://localhost:8000/api/tagofproblems",qs.stringify(params)).then((res)=>{
+  axios.post("https://polar-everglades-67407.herokuapp.com/public/index.php/api/tagofproblems",qs.stringify(params)).then((res)=>{
   let {data}=res;
 
 console.log(data);
