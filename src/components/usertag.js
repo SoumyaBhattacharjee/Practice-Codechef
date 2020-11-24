@@ -19,7 +19,7 @@ function Usertag(props)
       console.log("LOL");
       console.log(props);
 
-    let {data}=await axios.get("http://localhost:8000/api/tagofproblems/"+props.match.params.tagname);
+    let {data}=await axios.get("https://polar-everglades-67407.herokuapp.com/public/index.php/api/tagofproblems/"+props.match.params.tagname);
     console.log(data);
     setdata(data);
     if(props.cookies.userData)
@@ -30,7 +30,7 @@ function Usertag(props)
         code: props.match.params.tagname,
         tag:tag
       };
-        axios.post("http://localhost:8000/usertags",qs.stringify(params)).then((res)=>{
+        axios.post("https://polar-everglades-67407.herokuapp.com/public/index.php/usertags",qs.stringify(params)).then((res)=>{
         let {data}=res;
         setmytags(data);
         console.log(data);});
