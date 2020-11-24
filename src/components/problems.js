@@ -17,7 +17,7 @@ function Problem(props)
     const fetchdata= async ()=>{
       console.log("LOL");
       console.log(props);
-    let {data}=await axios.get("http://localhost:8000/api/problems/"+props.match.params.tagname);
+    let {data}=await axios.get("https://polar-everglades-67407.herokuapp.com/public/index.php/api/problems/"+props.match.params.tagname);
     if(!data.length)
     {
       alert.show("Sorry problems of this tag has not been fetched");
