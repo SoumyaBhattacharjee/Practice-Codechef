@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie';
 import { Navbar,Nav,Form,NavDropdown ,FormControl,Button} from 'react-bootstrap';
 import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-
+//  "proxy": "http://localhost:8000",
 //import { browserHistory} from 'react-router';
 
 function Author(props)
