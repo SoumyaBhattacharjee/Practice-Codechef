@@ -64,7 +64,7 @@ else setm("Wrong email or password");
     <label for="Name">Email</label><br />
     <textarea name="email" rows="1" cols="30" placeholder="Enter email ..." class="form-control" onChange={handleChange}></textarea><br/>
     <label for="password">Password</label><br />
-    <textarea name="password" type="password" rows="1" cols="30" placeholder="Enter password ..." class="form-control" onChange={handleChange}></textarea><br/>
+      <input name="password" type="password" rows="1" cols="30" placeholder="Enter password ..." class="form-control" onChange={handleChange}/><br/>
     <button type="submit" class="btn btn-success">Login</button>&nbsp;&nbsp;&nbsp;
       <button type="submit" class="btn btn-warning" onClick={regis}>Register</button>
 

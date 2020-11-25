@@ -6,6 +6,7 @@ import { Navbar,Nav,Form,NavDropdown ,FormControl,Button} from 'react-bootstrap'
 import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import qs from "qs";
+import { Spinner } from 'react-bootstrap';
 import { useAlert } from 'react-alert';
 function Alltags(props)
 {
@@ -13,6 +14,24 @@ function Alltags(props)
   let items=[];
   const alert = useAlert();
      let history = useHistory();
+     let [isloading,setloading]=useState(1);
+     function Loading()
+     {
+       if(isloading)
+       {
+         return (<Button variant="primary" className="deep" disabled>
+         <Spinner
+           as="span"
+           animation="border"
+           size="sm"
+           role="status"
+           aria-hidden="true"
+         />
+         &nbsp;Loading...
+         </Button>);
+       }
+       else return (<div></div>)
+     }
   useEffect( ()=>{
     if(!props.cookies.userData)
     {
@@ -32,7 +51,7 @@ function Alltags(props)
     let {data}=await axios.post("https://polar-everglades-67407.herokuapp.com/public/index.php/getalltags",qs.stringify(params));
     console.log(data);
     setdata(data);
-
+        setloading(0);
     }
     fetchdata();}
 
@@ -102,7 +121,7 @@ function getto(event)
 
   </tbody>
 </table>
-
+<Loading/>
     </div>
 
 
