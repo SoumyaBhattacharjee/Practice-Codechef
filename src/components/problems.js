@@ -6,12 +6,31 @@ import { Navbar,Nav,Form,NavDropdown ,FormControl,Button} from 'react-bootstrap'
 import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useAlert } from 'react-alert';
+import { Spinner } from 'react-bootstrap';
 function Problem(props)
 {
   let [datas,setdata]=useState([]);
   let items=[];
      let history = useHistory();
       const alert = useAlert();
+      let [isloading,setloading]=useState(1);
+      function Loading()
+      {
+        if(isloading)
+        {
+          return (<Button variant="primary" className="deep" disabled>
+          <Spinner
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />
+          &nbsp;Loading...
+          </Button>);
+        }
+        else return (<div></div>)
+      }
   useEffect( ()=>{
     console.log("In use Effect");
     const fetchdata= async ()=>{
@@ -24,6 +43,7 @@ function Problem(props)
       history.goBack();
     }
     setdata(data);
+      setloading(0);
     }
     fetchdata();
 
@@ -132,6 +152,7 @@ const handleOnFocus = () => {
 
   </tbody>
 </table>
+<Loading/>
 </div>
   )
 }

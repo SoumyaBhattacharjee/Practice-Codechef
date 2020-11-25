@@ -7,12 +7,31 @@ import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import qs from "qs";
 import { useAlert } from 'react-alert';
+import { Spinner } from 'react-bootstrap';
 function Userprobs(props)
 {
   let [datas,setdata]=useState([]);
   let items=[];
   const alert = useAlert();
      let history = useHistory();
+     let [isloading,setloading]=useState(1);
+     function Loading()
+     {
+       if(isloading)
+       {
+         return (<Button variant="primary" className="deep" disabled>
+         <Spinner
+           as="span"
+           animation="border"
+           size="sm"
+           role="status"
+           aria-hidden="true"
+         />
+         &nbsp;Loading...
+         </Button>);
+       }
+       else return (<div></div>)
+     }
   useEffect( ()=>{
     if(!props.cookies.userData)
     {
@@ -33,7 +52,7 @@ function Userprobs(props)
     let {data}=await axios.post("https://polar-everglades-67407.herokuapp.com/public/index.php/userprobs",qs.stringify(params));
     console.log(data);
     setdata(data);
-
+      setloading(0);
     }
     fetchdata();}
 
@@ -98,7 +117,7 @@ const handleOnFocus = () => {
 
   </tbody>
 </table>
-
+<Loading/>
     </div>
 
 

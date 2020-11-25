@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Nav,Form,NavDropdown ,FormControl,Button} from 'react-bootstrap';
 import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { Spinner } from 'react-bootstrap';
 import qs from "qs";
 function Usertag(props)
 {
@@ -13,6 +14,24 @@ function Usertag(props)
   let [mytags,setmytags]=useState([]);
   let [tag,settag]=useState("");
      let history = useHistory();
+     let [isloading,setloading]=useState(1);
+     function Loading()
+     {
+       if(isloading)
+       {
+         return (<Button variant="primary" className="deep" disabled>
+         <Spinner
+           as="span"
+           animation="border"
+           size="sm"
+           role="status"
+           aria-hidden="true"
+         />
+         &nbsp;Loading...
+         </Button>);
+       }
+       else return (<div></div>)
+     }
   useEffect( ()=>{
     console.log("In use Effect");
     const fetchdata= async ()=>{
@@ -22,6 +41,7 @@ function Usertag(props)
     let {data}=await axios.get("https://polar-everglades-67407.herokuapp.com/public/index.php/api/tagofproblems/"+props.match.params.tagname);
     console.log(data);
     setdata(data);
+      setloading(0);
     if(props.cookies.userData)
     {
       console.log("In userData usertag");
@@ -134,6 +154,7 @@ const handleOnFocus = () => {
   )}
   </div>
 }
+<Loading/>
 </div>
   )
 }

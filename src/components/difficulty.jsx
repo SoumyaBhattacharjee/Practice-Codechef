@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar,Nav,Form,NavDropdown ,FormControl,Button} from 'react-bootstrap';
 import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
-
+import { Spinner } from 'react-bootstrap';
 function Difficulty(props)
 {
   let [datas,setdata]=useState([]);
@@ -13,12 +13,31 @@ function Difficulty(props)
   let difficultytags=[{id:1,tag:'cakewalk'},{id:2,tag:'easy'},{id:3,tag:'easy-medium'},{id:4,tag:'medium'},{id:5,tag:'medium-hard'},{id:6,tag:'hard'},{id:7,tag:'challenge'}]
   let items=[];
   let history = useHistory();
+  let [isloading,setloading]=useState(1);
+  function Loading()
+  {
+    if(isloading)
+    {
+      return (<Button variant="primary" className="deep" disabled>
+      <Spinner
+        as="span"
+        animation="border"
+        size="sm"
+        role="status"
+        aria-hidden="true"
+      />
+      &nbsp;Loading...
+      </Button>);
+    }
+    else return (<div></div>)
+  }
   useEffect( ()=>{
   //  console.log("In use Effect");
     const fetchdata= async ()=>{
       //console.log("LOL");
     let {data}=await axios.get("https://polar-everglades-67407.herokuapp.com/public/index.php/api/key/author");
     setdata(data);
+      setloading(0);
     }
     fetchdata();
 

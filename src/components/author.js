@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { Navbar,Nav,Form,NavDropdown ,FormControl,Button} from 'react-bootstrap';
 import {BrowserRouter as Router,Switch,Route,Link,useHistory} from "react-router-dom";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { Spinner } from 'react-bootstrap';
 //  "proxy": "http://localhost:8000",
 //import { browserHistory} from 'react-router';
 
@@ -14,7 +15,24 @@ function Author(props)
   let [datas,setdata]=useState([]);
   let [search,setsearch]=useState("");
    let history = useHistory();
-
+   let [isloading,setloading]=useState(1);
+   function Loading()
+   {
+     if(isloading)
+     {
+       return (<Button variant="primary" className="deep" disabled>
+       <Spinner
+         as="span"
+         animation="border"
+         size="sm"
+         role="status"
+         aria-hidden="true"
+       />
+       &nbsp;Loading...
+       </Button>);
+     }
+     else return (<div></div>)
+   }
   let items=[];
   useEffect( ()=>{
     console.log("In use Effect");
@@ -23,10 +41,12 @@ function Author(props)
     let {data}=await axios.get("https://polar-everglades-67407.herokuapp.com/public/index.php/api/key/author");
     //  console.log("Data is",sessionStorage.getItem('userData'));
     setdata(data);
+    setloading(0);
     }
     fetchdata();
 
   },[])
+
   let [sortbyalpha,setsortbyalpha]=useState(0);
   let [sortbycount,setsortbycount]=useState(0);
   let [query,setquery]=useState("");
@@ -112,6 +132,7 @@ function redirects(event)
     </div>
     <button type="submit" name="button" class="btn btn-success by">Search</button>
     </form>
+
     <table class="table table-dark">
   <thead>
     <tr>
@@ -134,6 +155,7 @@ function redirects(event)
 
   </tbody>
 </table>
+<Loading/>
 </div>
   )
 }
