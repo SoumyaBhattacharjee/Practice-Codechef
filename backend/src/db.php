@@ -30,20 +30,16 @@ $app->get('/api/{name}', function (Request $request, Response $response, array $
     {
         die("connection failed due to ".mysqli_connection_error());
     }
-    //$sql="SELECT * FROM `tag_count`.`tagcount`";
+
     $sql="SELECT * FROM `tagcount`";
     $res=$con->query($sql);
-    //print_r($res);
-  //  echo var_dump($res)."<br>";
+
     $ans=array();
    while ($rows = $res->fetch_assoc()) {
        array_push($ans,array("id"=>$rows["id"],"tag"=>$rows["tag"],"type"=>$rows["type"],"count"=>$rows["count"]));
-      /*  echo $rows["id"]."<br>";
-        echo $rows["tag"]."<br>";
-        echo $rows["type"]."<br>";
-        echo $rows["count"]."<br>";*/
+
     }
-   // $res=array('name' => 'Rob', 'age' => 40,"roll"=>array("No"=>152 ,"Reg"=>6584));
+
     $response->getBody()->write("HI, $name ");
     $newResponse = $response->withJson($ans, 201);
   
@@ -63,19 +59,15 @@ $app->get('/api/key/{name}', function (Request $request, Response $response, arr
     }
     $sql="SELECT * FROM `tagcount` WHERE type='$name'";
     $res=$con->query($sql);
-    //print_r($res);
-  //  echo var_dump($res)."<br>";
+
     $ans=array();
     $c=1;
    while ($rows = $res->fetch_assoc()) {
        array_push($ans,array("id"=>$c,"tag"=>$rows["tag"],"type"=>$rows["type"],"count"=>$rows["count"]));
-      /*  echo $rows["id"]."<br>";
-        echo $rows["tag"]."<br>";
-        echo $rows["type"]."<br>";
-        echo $rows["count"]."<br>";*/
+
         $c++;
     }
-   // $res=array('name' => 'Rob', 'age' => 40,"roll"=>array("No"=>152 ,"Reg"=>6584));
+
     $response->getBody()->write("HI, $name ");
     $newResponse = $response->withJson($ans, 201);
   
@@ -95,15 +87,10 @@ $app->get('/api/problems/{name}', function (Request $request, Response $response
   $sql="SELECT * FROM `problems` WHERE tag='$name'";
   $res=$con->query($sql);
   //print_r($res);
-//  echo var_dump($res)."<br>";
   $ans=array();
   $c=1;
  while ($rows = $res->fetch_assoc()) {
      array_push($ans,array("id"=>$c,"tag"=>$name,"code"=>$rows["code"],"attempted"=>$rows["attempted"],"solved"=>$rows["solved"],"partsolved"=>$rows["partsolved"]));
-    /*  echo $rows["id"]."<br>";
-      echo $rows["tag"]."<br>";
-      echo $rows["type"]."<br>";
-      echo $rows["count"]."<br>";*/
       $c++;
   }
  // $res=array('name' => 'Rob', 'age' => 40,"roll"=>array("No"=>152 ,"Reg"=>6584));
@@ -192,8 +179,7 @@ $app->get('/api/tagofproblems/{name}', function (Request $request, Response $res
   }
   $sql="SELECT * FROM `problems` WHERE code='$name'";
   $res=$con->query($sql);
-  //print_r($res);
-//  echo var_dump($res)."<br>";
+
   $ans=array();
   $c=1;
  while ($rows = $res->fetch_assoc()) {
@@ -201,7 +187,7 @@ $app->get('/api/tagofproblems/{name}', function (Request $request, Response $res
       $c++;
   }
   
- // $res=array('name' => 'Rob', 'age' => 40,"roll"=>array("No"=>152 ,"Reg"=>6584));
+
  
   $newResponse = $response->withJson($ans, 201);
 
@@ -280,7 +266,6 @@ $app->post('/getalltags', function (Request $request, Response $response, array 
   $ans=array();
   $c=1;
   $dict=[];
-  //array_key_exists("Volvo",$a)
   while ($rows = $res->fetch_assoc()) {
     $code2=$rows["code"];
     if(array_key_exists($rows["code"],$dict)) continue;
@@ -318,7 +303,6 @@ $tag=$data["tag"];
   $ans=array();
   $c=1;
   $dict=[];
-  //array_key_exists("Volvo",$a)
   while ($rows = $res->fetch_assoc()) {
      array_push($ans,array("id"=>$c,"code"=>$rows["code"]));
       $c++;
